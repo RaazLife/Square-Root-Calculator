@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Square Root Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .calculator {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .input-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    input[type="number"] {
+      padding: 5px;
+      width: 150px;
+    }
+
+    button {
+      padding: 5px 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .root-symbol {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Square Root Calculator</h1>
+    <div class="calculator">
+      <div class="input-group">
+        <label for="number">Number:</label>
+        <input type="number" id="number" placeholder="Enter a number" required>
+      </div>
+      <div class="input-group">
+        <button id="calculateBtn">Calculate</button>
+      </div>
+      <div class="result">
+        <span id="resultExplanation"></span>
+        <br>
+        <span id="resultValue"></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("calculateBtn").addEventListener("click", function() {
+      const numberInput = document.getElementById("number");
+      const resultExplanation = document.getElementById("resultExplanation");
+      const resultValue = document.getElementById("resultValue");
+
+      const number = parseFloat(numberInput.value);
+
+      if (isNaN(number)) {
+        resultExplanation.textContent = "";
+        resultValue.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      if (number < 0) {
+        resultExplanation.textContent = "";
+        resultValue.textContent = "Square root of a negative number is not defined.";
+        return;
+      }
+
+      const squareRoot = Math.sqrt(number);
+      resultExplanation.textContent = `The square root of ${number} is calculated as follows:`;
+      resultValue.innerHTML = `Step 1: Start with an initial guess, let's say ${squareRoot.toFixed(2)}.<br>
+                               Step 2: Improve the guess by using the formula:<br>
+                               Guess = (Guess + (${number} / Guess)) / 2.<br>
+                               Step 3: Repeat step 2 until the guess is close enough to the actual square root.<br><br>
+                               The square root of ${number} is approximately <span class="root-symbol">&radic;</span>${squareRoot.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
 
